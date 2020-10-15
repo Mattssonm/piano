@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+	animation-name: example;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+	background-color: rgb(63, 63, 63);
+}
+
+#keyboard {
+	display: flex;
+	justify-content: center;
+	border-radius: 0 0 5px 5px;
+	margin-top: 100px;
+}
+
+.whiteKey {
+	width: 60px;
+	height: 200px;
+	background-color: #FFFFF0;
+}
+
+.blackKey {
+	width: 30px;
+	height: 130px;
+	background-color: black;
+	margin: 0 -15px;
+	z-index: 5;
+}
+
+.key {
+	border-radius: 0 0 5px 5px;
+	border: 1px solid black;
+}
+
+.key:focus {
+	outline: 0;
+}
+
+.animate {
+	background-color: #97B5DA;
+	animation-name: slideout;
+	animation-duration: 4s;
+}
+
+@keyframes slideout {
+	to {margin-top: 100%; opacity:0;}
+}
