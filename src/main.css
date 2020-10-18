@@ -51,3 +51,8 @@ body {
 @keyframes slideout {
 	to {margin-top: 100%; opacity:0;}
 }
+
+.noteLabel {
+	color: white;
+	font-size: 25px;
+}
