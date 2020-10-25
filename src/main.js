@@ -70,7 +70,7 @@ window.addEventListener("load", () => {
     return newElement;
   }
 
-  function notePressed(event, key) {
+  function keyPressed(event, key) {
     playNote(key.getAttribute("data-note"));
       
       //get coordinates of clicked element and send them with the animateKey function
@@ -93,7 +93,7 @@ window.addEventListener("load", () => {
   //add listener to all keys that calls playNote on click 
   keys.forEach( key => {
     key.addEventListener("click", e => {
-      notePressed(e, key);
+      keyPressed(e, key);
     });
   });
 
