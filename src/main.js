@@ -40,19 +40,26 @@ window.addEventListener("load", () => {
   function createLabels() { 
     keys.forEach( key => {
       const cords = key.getBoundingClientRect();
-      const note = key.getAttribute("data-note");
 
+      const note = key.getAttribute("data-note");
       let noteLabel = document.createElement("label");
       noteLabel.innerHTML = note
-      noteLabel.classList.add("noteLabel");
+      noteLabel.classList.add("keyLabel", "noteLabel");
+
+      const button = key.getAttribute("data-button");
+      let buttonLabel = document.createElement("label");
+      buttonLabel.innerHTML = button.toUpperCase()
+      buttonLabel.classList.add("keyLabel", "buttonLabel", "hidden")
       
       //set style with coordinates and append it to correct div
       if (key.classList.contains("whiteKey")) {
-        noteLabel = positionElementByCords(noteLabel, cords.left+24, cords.top+205)
-        document.getElementById("whiteLabels").appendChild(noteLabel);
+        noteLabel = positionElementByCords(noteLabel, cords.left+15, cords.top+205)
+        buttonLabel = positionElementByCords(buttonLabel, cords.left+15, cords.top+205)
+        document.getElementById("whiteLabels").append(noteLabel, buttonLabel);
       } else {
-        noteLabel = positionElementByCords(noteLabel, cords.left+2, cords.top-40)
-        document.getElementById("blackLabels").appendChild(noteLabel);
+        noteLabel = positionElementByCords(noteLabel, cords.left, cords.top-40)
+        buttonLabel = positionElementByCords(buttonLabel, cords.left, cords.top-40)
+        document.getElementById("blackLabels").append(noteLabel, buttonLabel);
       }
     });
   }
@@ -100,12 +107,11 @@ window.addEventListener("load", () => {
 
   //create labels
   const keys = document.querySelectorAll(".key");
-  console.log(keys);
   createLabels();
 
   // --- event listeners --- 
 
-  //add listener to all keys that calls playNote on click and on button press
+  //add listeners to all keys that calls playNote on click and on button press
   keys.forEach( key => {
     key.addEventListener("click", e => {
       keyPressed(key);
@@ -117,6 +123,26 @@ window.addEventListener("load", () => {
       if(key.getAttribute("data-button") === e.key) {
         keyPressed(key);
       }
+    });
+  })
+
+  document.getElementById("showNotes").addEventListener("click", e => {
+    document.querySelectorAll(".noteLabel").forEach( label => {
+      label.classList.remove("hidden");
+    });
+
+    document.querySelectorAll(".buttonLabel").forEach( label => {
+      label.classList.add("hidden");
+    });
+  })
+
+  document.getElementById("showButtons").addEventListener("click", e => {
+    document.querySelectorAll(".noteLabel").forEach( label => {
+      label.classList.add("hidden");
+    });
+
+    document.querySelectorAll(".buttonLabel").forEach( label => {
+      label.classList.remove("hidden");
     });
   })
 
